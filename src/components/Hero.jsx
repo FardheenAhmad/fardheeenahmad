@@ -211,7 +211,7 @@ export default function Hero() {
         window.dispatchEvent(new Event('skills:drop'))
       }, 600)
     }
-  }
+  }+
 
   return (
     <section

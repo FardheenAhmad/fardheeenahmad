@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -26,7 +25,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-dark-900 text-white overflow-x-hidden">
       <Navbar />
-      <main>
+
+      {/* ✅ FIX: Added padding-top */}
+      <main className="pt-24">
         <Hero />
         <SectionDivider />
         <About />
@@ -41,6 +42,7 @@ export default function App() {
         <SectionDivider />
         <Contact />
       </main>
+
       <Footer />
     </div>
   )

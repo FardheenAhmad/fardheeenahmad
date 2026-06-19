@@ -11,6 +11,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 88px;
   }
 
   body {
@@ -35,11 +36,15 @@
     width: 100%;
     max-width: 100%;
   }
+
+  section {
+    scroll-margin-top: 88px;
+  }
 }
 
 @layer components {
   .glass {
-    background: rgba(13, 13, 31, 0.6);
+    background: rgba(13, 13, 31, 0.78);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(139, 92, 246, 0.15);
@@ -104,9 +109,10 @@
   }
 
   .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 7vw, 2.5rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    line-height: 1.12;
   }
 
   .skill-bar {

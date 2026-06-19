@@ -99,13 +99,13 @@ const dropContainer = {
 }
 
 const dropItem = {
-  hidden: { opacity: 0, y: -160, scale: 0.85 },
+  hidden: { opacity: 0, y: -44, scale: 0.92 },
   show: {
     opacity: 1,
-    y: [ -160, 0, -14, 0, -6, 0 ],
-    scaleX: [ 1, 1.14, 0.96, 1.04, 1 ],
-    scaleY: [ 1, 0.9, 1.06, 0.98, 1 ],
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    y: [ -44, 0, -8, 0 ],
+    scaleX: [ 1, 1.04, 0.98, 1 ],
+    scaleY: [ 1, 0.97, 1.02, 1 ],
+    transition: { duration: 0.46, ease: [0.22, 1, 0.36, 1] },
   },
 }
 
@@ -127,11 +127,11 @@ export default function Skills() {
   }, [dropControls])
 
   return (
-    <section id="skills" className="py-28 px-6 relative overflow-hidden">
+    <section id="skills" className="relative overflow-hidden px-4 py-20 scroll-mt-24 sm:px-6 sm:py-24 lg:py-28">
       <SkillsBg activeTheme={theme} />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-14">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-8 sm:mb-10 lg:mb-12">
           <p className="text-purple-400 font-mono text-sm uppercase tracking-widest mb-3">02 / Skills</p>
           <h2 className="section-title text-white mb-4">Technical <span className="gradient-text">Expertise</span></h2>
           <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full" />
@@ -139,13 +139,13 @@ export default function Skills() {
         </motion.div>
 
         {/* Drop showcase (triggered from Hero Tech Stack click) */}
-        <div className="relative mb-10">
+        <div className="relative mb-8 sm:mb-10">
           <div className="absolute left-1/2 -translate-x-1/2 bottom-3 w-[92%] max-w-3xl h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
           <motion.div
             variants={dropContainer}
             initial="show"
             animate={dropControls}
-            className="flex flex-wrap justify-center gap-3 pb-6"
+            className="flex flex-wrap justify-center gap-2.5 pb-6 sm:gap-3"
           >
             {stackShowcase.map((name) => {
               const icon = techIcons[name]
@@ -153,7 +153,7 @@ export default function Skills() {
                 <motion.div
                   key={name}
                   variants={dropItem}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10"
+                  className="flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/10 bg-slate-950/70 px-3 py-2 backdrop-blur-md sm:px-4"
                   style={{ boxShadow: '0 10px 24px rgba(0,0,0,0.35)' }}
                 >
                   {icon && (
@@ -166,7 +166,7 @@ export default function Skills() {
                       onError={(e) => { e.currentTarget.style.display = 'none' }}
                     />
                   )}
-                  <span className="text-sm text-slate-200 font-medium">{name}</span>
+                  <span className="truncate text-xs font-medium text-slate-200 sm:text-sm">{name}</span>
                 </motion.div>
               )
             })}
@@ -174,17 +174,17 @@ export default function Skills() {
         </div>
 
         {/* Tab nav */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }} className="flex flex-wrap justify-center gap-3 mb-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }} className="grid grid-cols-1 gap-3 mb-8 sm:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center lg:mb-10">
           {skills.map((g, i) => {
             const Icon = iconMap[g.icon] ?? Zap
             const t = categoryTheme[g.category]
             const isActive = i === activeIdx
             return (
-              <motion.button key={g.category} onClick={() => changeTab(i)} whileHover={{ y: -3, scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-semibold transition-all duration-300 cursor-pointer ${isActive ? t.tabActive : 'border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/60'}`}>
+              <motion.button key={g.category} onClick={() => changeTab(i)} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                className={`relative flex min-w-0 items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-300 cursor-pointer sm:px-5 ${isActive ? t.tabActive : 'border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/60'}`}>
                 {isActive && <motion.div layoutId="tab-glow" className={`absolute inset-0 rounded-full bg-gradient-to-r ${g.color} opacity-10`} transition={{ type: 'spring', stiffness: 400, damping: 30 }} />}
-                <div className={`w-6 h-6 rounded-lg flex items-center justify-center bg-gradient-to-br ${g.color}`}><Icon className="w-3.5 h-3.5 text-white" /></div>
-                <span className="relative z-10">{g.category}</span>
+                <div className={`w-6 h-6 shrink-0 rounded-lg flex items-center justify-center bg-gradient-to-br ${g.color}`}><Icon className="w-3.5 h-3.5 text-white" /></div>
+                <span className="relative z-10 truncate">{g.category}</span>
                 <span className="text-xs opacity-60 relative z-10">{g.items.length}</span>
               </motion.button>
             )
@@ -192,20 +192,20 @@ export default function Skills() {
         </motion.div>
 
         {/* Flying panel */}
-        <div className="relative overflow-hidden min-h-[320px]">
+        <div className="relative overflow-hidden min-h-[520px] sm:min-h-[460px] lg:min-h-[320px]">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div key={activeIdx} custom={direction} variants={flyVariants} initial="enter" animate="center" exit="exit"
-              className={`glass-card border ${theme.border} p-8`}
+              className={`glass-card border ${theme.border} p-5 sm:p-6 lg:p-8`}
               style={{ boxShadow: `0 0 50px ${theme.glow}, 0 0 100px ${theme.glow.replace('0.4','0.1')}` }}>
-              <div className="grid md:grid-cols-2 gap-10 items-start">
+              <div className="grid gap-8 md:grid-cols-2 lg:gap-10 items-start">
                 <div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${group.color} flex items-center justify-center shadow-lg`}
+                  <div className="flex items-center gap-3 mb-6 sm:gap-4">
+                    <div className={`w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br ${group.color} flex items-center justify-center shadow-lg sm:w-14 sm:h-14`}
                       style={{ boxShadow: `0 8px 24px ${theme.glow}` }}>
-                      {(() => { const Icon = iconMap[group.icon] ?? Zap; return <Icon className="w-7 h-7 text-white" /> })()}
+                      {(() => { const Icon = iconMap[group.icon] ?? Zap; return <Icon className="w-6 h-6 text-white sm:w-7 sm:h-7" /> })()}
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{group.category}</h3>
+                    <div className="min-w-0">
+                      <h3 className="truncate text-lg font-bold text-white sm:text-xl">{group.category}</h3>
                       <p className="text-sm text-slate-500">{group.items.length} core technologies</p>
                     </div>
                   </div>
@@ -215,7 +215,7 @@ export default function Skills() {
                         initial={{ opacity: 0, scale: 0.65, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ delay: i * 0.06 + 0.15, duration: 0.38, ease: 'backOut' }}
                         whileHover={{ scale: 1.1, y: -3 }}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full border cursor-default transition-all duration-200 ${theme.badge}`}>
+                        className={`flex max-w-full items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold cursor-default transition-all duration-200 ${theme.badge}`}>
                         <TechImg name={item.name} size={14} />{item.name}
                       </motion.span>
                     ))}

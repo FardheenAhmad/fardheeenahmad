@@ -19,26 +19,35 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
+    onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+  
+const handleNav = (href) => {
+  setActive(href.replace('#', ''))
+  setMenuOpen(false)
 
-  const handleNav = (href) => {
-    setActive(href.replace('#', ''))
-    setMenuOpen(false)
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  const element = document.querySelector(href)
+  const offset = 80
+
+  if (element) {
+    const top = element.offsetTop - offset
+    window.scrollTo({ top, behavior: 'smooth' })
   }
-
+}
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'glass shadow-lg shadow-purple-900/10' : 'bg-transparent'
+        scrolled
+          ? 'bg-slate-950/95 border-b border-purple-500/20 shadow-2xl shadow-black/30 backdrop-blur-xl'
+          : 'bg-slate-950/25 border-b border-white/5 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
         <motion.a
           href="#home"
           onClick={() => handleNav('#home')}
@@ -63,13 +72,13 @@ export default function Navbar() {
         </motion.a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <motion.button
               key={link.href}
               onClick={() => handleNav(link.href)}
               whileHover={{ y: -2 }}
-              className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
+              className={`relative px-3 xl:px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
                 active === link.href.replace('#', '')
                   ? 'text-purple-400'
                   : 'text-slate-400 hover:text-white'
@@ -90,7 +99,9 @@ export default function Navbar() {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="lg:hidden flex flex-col gap-1.5 p-2 shrink-0"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
         >
           <motion.span
             animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -115,7 +126,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden glass border-t border-purple-500/10"
+            className="lg:hidden bg-slate-950/98 border-t border-purple-500/20 shadow-2xl shadow-black/30 backdrop-blur-xl"
           >
             <div className="px-6 py-4 flex flex-col gap-2">
               {navLinks.map((link, i) => (
