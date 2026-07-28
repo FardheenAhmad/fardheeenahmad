@@ -13,12 +13,12 @@ const itemVariants = {
 }
 
 const highlights = [
-  { icon: techIcons['React.js'],          label: 'React.js & React Native',  color: '#61DAFB' },
-  { icon: techIcons['Spring Boot'],       label: 'REST API & Spring Boot',    color: '#6DB33F' },
-  { icon: techIcons['JavaScript (ES6+)'], label: 'Modern JavaScript ES6+',   color: '#F7DF1E' },
-  { icon: techIcons['MongoDB'],           label: 'MongoDB & MySQL',           color: '#47A248' },
-  { icon: techIcons['Redux Toolkit'],     label: 'Redux State Management',    color: '#764ABC' },
-  { icon: techIcons['AI Dev Tools'],      label: 'AI-Assisted Development',   color: '#a78bfa' },
+  { icon: techIcons['React.js'],          label: 'React.js & React Native',   color: '#61DAFB' },
+  { icon: techIcons['Spring Boot'],       label: 'Spring Boot & REST APIs',   color: '#6DB33F' },
+  { icon: techIcons['JavaScript (ES6+)'], label: 'JavaScript ES6+',           color: '#F7DF1E' },
+  { icon: techIcons['Tailwind CSS'],      label: 'Tailwind CSS',              color: '#06B6D4' },
+  { icon: techIcons['Redux Toolkit'],     label: 'Redux Toolkit',             color: '#764ABC' },
+  { icon: techIcons['GitHub Copilot'],    label: 'Claude AI & Copilot',       color: '#a78bfa' },
 ]
 
 const codeSymbols = ['</>', '{}', '()', '=>', '[]', '&&', '||', '++']
@@ -26,45 +26,23 @@ const codeSymbols = ['</>', '{}', '()', '=>', '[]', '&&', '||', '++']
 function AboutBg() {
   return (
     <>
-      {/* Section tint */}
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, #04040a 0%, #06081a 50%, #04040a 100%)' }} />
-      {/* Orbs */}
-      <motion.div
-        animate={{ x: [0, 40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-[10%] right-[5%] w-[420px] h-[420px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)', filter: 'blur(40px)' }}
-      />
-      <motion.div
-        animate={{ x: [0, -30, 0], y: [0, 25, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute bottom-[10%] left-[5%] w-[350px] h-[350px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%)', filter: 'blur(40px)' }}
-      />
+      <div className="absolute inset-0" style={{ background: '#F8F8FF' }} />
+      {/* Lavender SVG blob — top-right corner, inside section */}
+      <svg className="absolute top-0 right-0 w-36 h-36 sm:w-56 sm:h-56 lg:w-96 lg:h-96 pointer-events-none opacity-50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#C4B5FD" d="M360,0 L360,360 L228,360 C170,356,118,320,100,268 C82,216,128,162,96,112 C64,62,8,50,12,10 C16,-30,78,-8,168,-2 C248,-6,302,-3,360,0 Z"/>
+      </svg>
       {/* Floating code symbols */}
       {codeSymbols.map((sym, i) => (
-        <motion.span
-          key={sym}
-          className="absolute font-mono font-black select-none pointer-events-none"
-          style={{
-            left: `${8 + i * 12}%`,
-            top: `${15 + (i % 4) * 22}%`,
-            fontSize: `${28 + (i % 3) * 14}px`,
-            color: i % 2 === 0 ? 'rgba(99,102,241,0.07)' : 'rgba(56,189,248,0.06)',
-          }}
-          animate={{ y: [0, -(12 + i * 3), 0], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 5 + i * 0.8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}
-        >
+        <motion.span key={sym} className="absolute font-mono font-black select-none pointer-events-none"
+          style={{ left: `${8 + i * 12}%`, top: `${15 + (i % 4) * 22}%`, fontSize: `${28 + (i % 3) * 14}px`,
+            color: i % 2 === 0 ? 'rgba(124,58,237,0.07)' : 'rgba(239,68,68,0.05)' }}
+          animate={{ y: [0, -(12 + i * 3), 0], opacity: [0.4, 0.9, 0.4] }}
+          transition={{ duration: 5 + i * 0.8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.6 }}>
           {sym}
         </motion.span>
       ))}
-      {/* Diagonal grid lines */}
-      <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(99,102,241,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.5) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
+      {/* Dot grid */}
+      <div className="absolute inset-0 bg-dots-sm opacity-50 pointer-events-none" />
     </>
   )
 }
@@ -90,12 +68,12 @@ export default function About() {
         className="max-w-6xl mx-auto relative z-10"
       >
         <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-indigo-400 font-mono text-sm uppercase tracking-widest mb-3">01 / About Me</p>
-          <h2 className="section-title text-white mb-4">
+          <p className="font-mono text-sm uppercase tracking-widest mb-3 text-gray-400">01 / About Me</p>
+          <h2 className="section-title mb-4">
             Who I{' '}
-            <span style={{ background: 'linear-gradient(135deg,#6366f1,#38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Am</span>
+            <span style={{ background: 'linear-gradient(135deg,#7C3AED,#E53935)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Am</span>
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto rounded-full" />
+          <div className="w-16 h-1 bg-gradient-to-r from-violet-500 to-red-500 mx-auto rounded-full" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -108,9 +86,9 @@ export default function About() {
                 FA
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-white font-bold text-lg truncate">{personal.name}</h3>
-                <p className="text-indigo-300 text-sm font-medium">{personal.title}</p>
-                <div className="flex items-center gap-1.5 mt-1.5 text-xs text-slate-500">
+                <h3 className="text-gray-900 font-bold text-lg truncate">{personal.name}</h3>
+                <p className="text-violet-600 text-sm font-medium">{personal.title}</p>
+                <div className="flex items-center gap-1.5 mt-1.5 text-xs text-gray-400">
                   <MapPin className="w-3 h-3" /><span>{personal.location}</span>
                   <span className="mx-1">·</span>
                   <Briefcase className="w-3 h-3" /><span>2+ yrs</span>
@@ -121,7 +99,7 @@ export default function About() {
               </span>
             </div>
 
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {personal.stats.map((stat, i) => (
                 <motion.div key={stat.label}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -135,7 +113,7 @@ export default function About() {
                     style={{ background: 'linear-gradient(135deg,#6366f1,#38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     {stat.value}
                   </div>
-                  <div className="text-[10px] text-slate-500 uppercase tracking-wide leading-tight">{stat.label}</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wide leading-tight">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -156,7 +134,7 @@ export default function About() {
                       ? <img src={h.icon} alt={h.label} width={17} height={17} className="object-contain" />
                       : <div className="w-3 h-3 rounded-full" style={{ backgroundColor: h.color }} />}
                   </div>
-                  <span className="text-sm text-slate-300 font-medium leading-tight">{h.label}</span>
+                  <span className="text-sm text-gray-700 font-medium leading-tight truncate min-w-0">{h.label}</span>
                 </motion.div>
               ))}
             </div>
@@ -164,18 +142,18 @@ export default function About() {
 
           {/* Right */}
           <div className="space-y-6">
-            <motion.p variants={itemVariants} className="text-slate-300 text-lg leading-relaxed">
+            <motion.p variants={itemVariants} className="text-gray-600 text-lg leading-relaxed">
               {personal.summary}
             </motion.p>
             <motion.div variants={itemVariants}>
-              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-indigo-400" /><span>Languages</span>
+              <h3 className="text-gray-900 font-semibold mb-3 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-violet-500" /><span>Languages</span>
               </h3>
               <div className="flex flex-wrap gap-2">
                 {languages.map((lang) => (
                   <motion.span key={lang.name} whileHover={{ scale: 1.1 }}
-                    className="px-3 py-1 rounded-full text-xs font-medium glass border border-indigo-500/20 text-indigo-300">
-                    {lang.name}<span className="text-slate-500 ml-1">· {lang.level}</span>
+                    className="px-3 py-1 rounded-full text-xs font-medium glass border border-violet-200 text-violet-700">
+                    {lang.name}<span className="text-gray-400 ml-1">· {lang.level}</span>
                   </motion.span>
                 ))}
               </div>
@@ -184,11 +162,11 @@ export default function About() {
               <a
                 href={`mailto:${personal.email}`}
                 onClick={handleLink(`mailto:${personal.email}`)}
-                className="flex items-center gap-2 text-sm text-slate-400 hover:text-indigo-400 transition-colors"
+                className="flex items-center gap-2 text-sm text-gray-500 hover:text-violet-600 transition-colors"
               >
                 <Mail className="w-4 h-4" /><span>{personal.email}</span>
               </a>
-              <a href={personal.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-slate-400 hover:text-blue-400 transition-colors">
+              <a href={personal.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">
                 <Link2 className="w-4 h-4" /><span>LinkedIn Profile</span>
               </a>
             </motion.div>

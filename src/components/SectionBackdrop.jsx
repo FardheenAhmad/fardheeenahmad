@@ -1,10 +1,16 @@
 export default function SectionBackdrop({ theme }) {
   if (!theme) return null
 
-  const { tint, gridOpacity = 0.25, orbs = [] } = theme
+  const { baseBg, tint, gridOpacity = 0.25, orbs = [] } = theme
 
   return (
     <>
+      {baseBg && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: baseBg }}
+        />
+      )}
       {tint && (
         <div
           className="absolute inset-0 pointer-events-none"

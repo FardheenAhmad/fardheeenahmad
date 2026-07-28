@@ -7,10 +7,10 @@ import { Server, Wrench, Zap, Database } from 'lucide-react'
 const iconMap = { zap: Zap, server: Server, wrench: Wrench, database: Database }
 
 const categoryTheme = {
-  Frontend:        { barCss: 'linear-gradient(90deg,#8b5cf6,#a855f7)', glow: 'rgba(139,92,246,0.4)',  border: 'border-violet-500/40',  tabActive: 'bg-violet-500/15 border-violet-500/50 text-violet-200',  percent: 'text-violet-400',  badge: 'bg-violet-500/10 border-violet-500/30 text-violet-300',  dot: '#8b5cf6', orbColor: 'rgba(139,92,246,' },
-  Backend:         { barCss: 'linear-gradient(90deg,#3b82f6,#06b6d4)', glow: 'rgba(59,130,246,0.4)',  border: 'border-blue-500/40',    tabActive: 'bg-blue-500/15 border-blue-500/50 text-blue-200',        percent: 'text-blue-400',    badge: 'bg-blue-500/10 border-blue-500/30 text-blue-300',        dot: '#3b82f6', orbColor: 'rgba(59,130,246,' },
-  Database:        { barCss: 'linear-gradient(90deg,#10b981,#14b8a6)', glow: 'rgba(16,185,129,0.4)', border: 'border-emerald-500/40', tabActive: 'bg-emerald-500/15 border-emerald-500/50 text-emerald-200', percent: 'text-emerald-400', badge: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300', dot: '#10b981', orbColor: 'rgba(16,185,129,' },
-  'Tools & DevOps':{ barCss: 'linear-gradient(90deg,#f59e0b,#f97316)', glow: 'rgba(245,158,11,0.4)', border: 'border-amber-500/40',   tabActive: 'bg-amber-500/15 border-amber-500/50 text-amber-200',    percent: 'text-amber-400',   badge: 'bg-amber-500/10 border-amber-500/30 text-amber-300',     dot: '#f59e0b', orbColor: 'rgba(245,158,11,' },
+  Frontend:        { barCss: 'linear-gradient(90deg,#8b5cf6,#a855f7)', glow: 'rgba(139,92,246,0.4)',  border: 'border-violet-500/40',  tabActive: 'bg-violet-100 border-violet-300 text-violet-700',  percent: 'text-violet-400',  badge: 'bg-violet-50 border-violet-200 text-violet-600',  dot: '#8b5cf6', orbColor: 'rgba(139,92,246,' },
+  Backend:         { barCss: 'linear-gradient(90deg,#3b82f6,#06b6d4)', glow: 'rgba(59,130,246,0.4)',  border: 'border-blue-500/40',    tabActive: 'bg-blue-100 border-blue-300 text-blue-700',        percent: 'text-blue-400',    badge: 'bg-blue-50 border-blue-200 text-blue-600',        dot: '#3b82f6', orbColor: 'rgba(59,130,246,' },
+  Database:        { barCss: 'linear-gradient(90deg,#10b981,#14b8a6)', glow: 'rgba(16,185,129,0.4)', border: 'border-emerald-500/40', tabActive: 'bg-emerald-100 border-emerald-300 text-emerald-700', percent: 'text-emerald-400', badge: 'bg-emerald-50 border-emerald-200 text-emerald-600', dot: '#10b981', orbColor: 'rgba(16,185,129,' },
+  'Tools & AI':     { barCss: 'linear-gradient(90deg,#f59e0b,#f97316)', glow: 'rgba(245,158,11,0.4)', border: 'border-amber-500/40',   tabActive: 'bg-amber-100 border-amber-300 text-amber-700',    percent: 'text-amber-400',   badge: 'bg-amber-50 border-amber-200 text-amber-600',     dot: '#f59e0b', orbColor: 'rgba(245,158,11,' },
 }
 
 const flyVariants = {
@@ -19,7 +19,7 @@ const flyVariants = {
   exit:  (dir) => ({ x: dir * -440, opacity: 0, scale: 0.88, transition: { duration: 0.28, ease: [0.55, 0, 1, 0.45] } }),
 }
 
-const floatingTags = ['HTML5','CSS3','Redux Thunk','Axios','JSON APIs','OpenAI Codex','GitHub Copilot','Claude AI','ES6+','React Hooks','MVC','WebSockets']
+const floatingTags = ['HTML5','CSS3','Axios','Framer Motion','Node.js','Express.js','Vite','VS Code','OpenAI Codex','GitHub Copilot','Claude AI','WebSockets']
 
 function TechImg({ name, size = 18 }) {
   const url = techIcons[name]
@@ -38,7 +38,7 @@ function SkillBar({ name, level, index, theme }) {
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
           <TechImg name={name} size={18} />
-          <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">{name}</span>
+          <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">{name}</span>
         </div>
         <span className={`text-xs font-mono font-bold ${theme.percent}`}>{level}%</span>
       </div>
@@ -59,7 +59,12 @@ function SkillsBg({ activeTheme }) {
   const oc = activeTheme.orbColor
   return (
     <>
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,#04040a 0%,#06060f 50%,#04040a 100%)' }} />
+      <div className="absolute inset-0" style={{ background: '#ffffff' }} />
+      {/* Purple SVG blob — bottom-left corner */}
+      <svg className="absolute bottom-0 left-0 w-36 h-36 sm:w-56 sm:h-56 lg:w-96 lg:h-96 pointer-events-none opacity-45" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#C4B5FD" d="M0,360 L0,0 L132,0 C192,-6,248,26,268,80 C288,134,232,186,262,238 C292,290,358,302,356,350 C354,398,284,366,200,362 C116,360,56,365,0,360 Z"/>
+      </svg>
+      <div className="absolute inset-0 bg-dots-sm opacity-40 pointer-events-none" />
       <motion.div
         animate={{ x: [0, 50, 0], y: [0, -40, 0], scale: [1, 1.2, 1] }}
         transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
@@ -88,7 +93,7 @@ function SkillsBg({ activeTheme }) {
   )
 }
 
-const stackShowcase = ['React.js', 'React Native', 'JavaScript (ES6+)', 'Redux Toolkit', 'Spring Boot', 'MongoDB', 'MySQL', 'Node.js']
+const stackShowcase = ['React.js', 'React Native', 'JavaScript (ES6+)', 'Tailwind CSS', 'Spring Boot', 'Redux Toolkit', 'MongoDB', 'MySQL', 'WebSockets', 'Claude AI', 'GitHub Copilot', 'Postman']
 
 const dropContainer = {
   hidden: { opacity: 1 },
@@ -132,10 +137,10 @@ export default function Skills() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-8 sm:mb-10 lg:mb-12">
-          <p className="text-purple-400 font-mono text-sm uppercase tracking-widest mb-3">02 / Skills</p>
-          <h2 className="section-title text-white mb-4">Technical <span className="gradient-text">Expertise</span></h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full" />
-          <p className="text-slate-400 mt-4 max-w-xl mx-auto">A full-stack toolkit built over 2+ years across web and mobile platforms.</p>
+          <p className="font-mono text-sm uppercase tracking-widest mb-3 text-gray-400">02 / Skills</p>
+          <h2 className="section-title mb-4">Technical <span className="gradient-text">Expertise</span></h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-violet-500 to-blue-500 mx-auto rounded-full" />
+          <p className="text-gray-500 mt-4 max-w-sm mx-auto text-center" style={{ textWrap: 'balance' }}>Full-stack toolkit built across web &amp; mobile over 2+ years.</p>
         </motion.div>
 
         {/* Drop showcase (triggered from Hero Tech Stack click) */}
@@ -153,7 +158,7 @@ export default function Skills() {
                 <motion.div
                   key={name}
                   variants={dropItem}
-                  className="flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/10 bg-slate-950/70 px-3 py-2 backdrop-blur-md sm:px-4"
+                  className="flex min-w-0 max-w-full items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 shadow-sm sm:px-4"
                   style={{ boxShadow: '0 10px 24px rgba(0,0,0,0.35)' }}
                 >
                   {icon && (
@@ -166,7 +171,7 @@ export default function Skills() {
                       onError={(e) => { e.currentTarget.style.display = 'none' }}
                     />
                   )}
-                  <span className="truncate text-xs font-medium text-slate-200 sm:text-sm">{name}</span>
+                  <span className="truncate text-xs font-medium text-gray-700 sm:text-sm">{name}</span>
                 </motion.div>
               )
             })}
@@ -181,7 +186,7 @@ export default function Skills() {
             const isActive = i === activeIdx
             return (
               <motion.button key={g.category} onClick={() => changeTab(i)} whileHover={{ y: -3, scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                className={`relative flex min-w-0 items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-300 cursor-pointer sm:px-5 ${isActive ? t.tabActive : 'border-slate-700/50 text-slate-400 hover:text-slate-200 hover:border-slate-600/60'}`}>
+                className={`relative flex min-w-0 items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-300 cursor-pointer sm:px-5 ${isActive ? t.tabActive : 'border-gray-200 text-gray-500 hover:text-gray-800 hover:border-gray-300 bg-white'}`}>
                 {isActive && <motion.div layoutId="tab-glow" className={`absolute inset-0 rounded-full bg-gradient-to-r ${g.color} opacity-10`} transition={{ type: 'spring', stiffness: 400, damping: 30 }} />}
                 <div className={`w-6 h-6 shrink-0 rounded-lg flex items-center justify-center bg-gradient-to-br ${g.color}`}><Icon className="w-3.5 h-3.5 text-white" /></div>
                 <span className="relative z-10 truncate">{g.category}</span>
@@ -205,8 +210,8 @@ export default function Skills() {
                       {(() => { const Icon = iconMap[group.icon] ?? Zap; return <Icon className="w-6 h-6 text-white sm:w-7 sm:h-7" /> })()}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="truncate text-lg font-bold text-white sm:text-xl">{group.category}</h3>
-                      <p className="text-sm text-slate-500">{group.items.length} core technologies</p>
+                      <h3 className="truncate text-lg font-bold text-gray-900 sm:text-xl">{group.category}</h3>
+                      <p className="text-sm text-gray-400">{group.items.length} core technologies</p>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -243,7 +248,7 @@ export default function Skills() {
 
         {/* Floating "also worked with" */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="mt-14 text-center">
-          <p className="text-slate-500 text-sm mb-5 uppercase tracking-wider font-mono">Also worked with</p>
+          <p className="text-gray-400 text-sm mb-5 uppercase tracking-wider font-mono">Also worked with</p>
           <div className="flex flex-wrap gap-3 justify-center">
             {floatingTags.map((tag, i) => (
               <motion.span key={tag}
@@ -251,7 +256,7 @@ export default function Skills() {
                 transition={{ delay: i * 0.045, duration: 0.38, ease: 'backOut' }}
                 animate={{ y: [0, i % 2 === 0 ? -6 : -8, 0] }}
                 whileHover={{ scale: 1.12, y: -4 }}
-                className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full glass border border-slate-700/50 text-slate-400 hover:text-white hover:border-purple-500/40 cursor-default transition-colors duration-200">
+                className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full bg-white border border-gray-200 text-gray-600 hover:text-gray-900 hover:border-violet-300 shadow-sm cursor-default transition-colors duration-200">
                 <TechImg name={tag} size={15} />{tag}
               </motion.span>
             ))}

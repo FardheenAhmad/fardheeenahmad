@@ -13,8 +13,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-purple-500/10 py-12 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-purple-900/5 to-transparent pointer-events-none" />
+    <footer className="relative border-t border-gray-200 py-12 px-6 overflow-hidden" style={{ background: '#F8F9FA' }}>
+      <div className="absolute inset-0 bg-dots-sm opacity-30 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -25,8 +25,8 @@ export default function Footer() {
             className="text-center md:text-left"
           >
             <div className="font-mono text-lg font-bold gradient-text mb-1">{'<FA />'}</div>
-            <p className="text-slate-500 text-sm">{personal.name}</p>
-            <p className="text-slate-600 text-xs mt-1">{personal.title}</p>
+            <p className="text-gray-500 text-sm">{personal.name}</p>
+            <p className="text-gray-400 text-xs mt-1">{personal.title}</p>
           </motion.div>
 
           <motion.div
@@ -51,7 +51,7 @@ export default function Footer() {
                 className="w-10 h-10 glass-card flex items-center justify-center hover:border-purple-500/40 transition-all"
                 title={link.label}
               >
-                <link.Icon className="w-5 h-5 text-slate-200" aria-hidden="true" />
+                <link.Icon className="w-5 h-5 text-gray-600" aria-hidden="true" />
               </motion.a>
             ))}
           </motion.div>
@@ -61,7 +61,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-          className="text-center text-slate-600 text-xs"
+          className="text-center text-gray-400 text-xs"
         >
             <p>© {year} {personal.name}</p>
             <p className="mt-1 inline-flex items-center gap-1.5">
@@ -71,10 +71,10 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-purple-500/5 text-center">
-          <p className="text-slate-700 text-xs inline-flex items-center gap-1.5">
+        <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+          <p className="text-gray-400 text-xs inline-flex items-center gap-1.5">
             <span>Made with passion · Full Stack Developer · {personal.location}</span>
-            <MapPin className="w-3.5 h-3.5 text-slate-600" aria-hidden="true" />
+            <MapPin className="w-3.5 h-3.5 text-gray-400" aria-hidden="true" />
           </p>
         </div>
       </div>

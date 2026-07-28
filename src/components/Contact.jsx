@@ -85,7 +85,12 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-28 px-6 relative overflow-hidden">
-      <SectionBackdrop theme={sectionThemes.contact} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: '#FFF5F8' }} />
+      {/* Rose SVG blob — bottom-left corner */}
+      <svg className="absolute bottom-0 left-0 w-36 h-36 sm:w-56 sm:h-56 lg:w-96 lg:h-96 pointer-events-none opacity-50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FFADB5" d="M0,360 L0,0 L124,0 C186,-6,244,28,268,82 C292,136,238,188,268,242 C298,296,364,306,360,354 C356,402,284,368,198,364 C112,360,56,366,0,360 Z"/>
+      </svg>
+      <div className="absolute inset-0 bg-dots-sm opacity-35 pointer-events-none" />
 
       <motion.div
         variants={containerVariants}
@@ -95,15 +100,15 @@ export default function Contact() {
         className="max-w-6xl mx-auto relative z-10"
       >
         <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-rose-400 font-mono text-sm uppercase tracking-widest mb-3">06 / Contact</p>
-          <h2 className="section-title text-white mb-4">
+          <p className="font-mono text-sm uppercase tracking-widest mb-3 text-gray-400">06 / Contact</p>
+          <h2 className="section-title mb-4">
             Let's{' '}
             <span style={{ background: 'linear-gradient(135deg,#ec4899,#f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Connect
             </span>
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-pink-500 mx-auto rounded-full" />
-          <p className="text-slate-400 mt-4 max-w-xl mx-auto">
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
             Open to new opportunities, collaborations, and interesting projects. Let's build something great together.
           </p>
         </motion.div>
@@ -111,7 +116,7 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact methods */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-white font-bold text-lg mb-6">Get in touch</h3>
+            <h3 className="text-gray-900 font-bold text-lg mb-6">Get in touch</h3>
             {contactMethods.map((method, i) => (
               <motion.div
                 key={method.label}
@@ -120,10 +125,9 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 whileHover={{ x: 6, scale: 1.01 }}
-                className="glass-card p-5 flex items-center gap-4 border transition-all duration-300"
-                style={{ borderColor: `${method.color}20` }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${method.color}40`; e.currentTarget.style.boxShadow = `0 4px 20px ${method.color}15` }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${method.color}20`; e.currentTarget.style.boxShadow = '' }}
+                className="glass-card p-5 flex items-center gap-4 border border-gray-100 transition-all duration-300"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = method.color; e.currentTarget.style.boxShadow = `0 4px 20px ${method.color}30` }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.08)'; e.currentTarget.style.boxShadow = '' }}
               >
                 <div
                   className={`w-12 h-12 rounded-xl bg-gradient-to-br ${method.bg} flex items-center justify-center text-xl shrink-0`}
@@ -132,7 +136,7 @@ export default function Contact() {
                   <method.Icon className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider font-mono mb-0.5">{method.label}</p>
+                  <p className="text-xs text-gray-400 uppercase tracking-wider font-mono mb-0.5">{method.label}</p>
                   {method.href ? (
                     <a
                       href={method.href}
@@ -140,26 +144,26 @@ export default function Contact() {
                       rel="noreferrer"
                       onClick={handleLink(method.href)}
                       className="text-slate-200 font-medium truncate block transition-colors duration-200"
-                      style={{ color: '#e2e8f0' }}
+                      style={{ color: '#374151' }}
                       onMouseEnter={(e) => { e.currentTarget.style.color = method.color }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = '#e2e8f0' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = '#374151' }}
                     >
                       {method.value}
                     </a>
                   ) : (
-                    <p className="text-slate-200 font-medium">{method.value}</p>
+                    <p className="text-gray-700 font-medium">{method.value}</p>
                   )}
                 </div>
                 {method.href && <ArrowUpRight className="w-4 h-4 opacity-50" style={{ color: method.color }} />}
               </motion.div>
             ))}
 
-            <motion.div variants={itemVariants} className="glass-card p-6 mt-4 border border-green-500/20">
+            <motion.div variants={itemVariants} className="glass-card p-6 mt-4 border border-green-200">
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-green-400 text-sm font-medium">Available for hire</span>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-gray-500 text-sm leading-relaxed">
                 Currently looking for full-stack development roles. Excited about React.js, React Native, and full-stack opportunities.
               </p>
             </motion.div>
@@ -167,14 +171,14 @@ export default function Contact() {
 
           {/* Form */}
           <motion.div variants={itemVariants}>
-            <h3 className="text-white font-bold text-lg mb-6">Send a message</h3>
-            <form onSubmit={handleSubmit} className="glass-card border border-rose-500/15 p-8 space-y-5">
+            <h3 className="text-gray-900 font-bold text-lg mb-6">Send a message</h3>
+            <form onSubmit={handleSubmit} className="glass-card border border-rose-100 p-8 space-y-5">
               {[
                 { name: 'name', label: 'Your Name', type: 'text', placeholder: 'John Doe' },
                 { name: 'email', label: 'Your Email', type: 'email', placeholder: 'john@example.com' },
               ].map((field) => (
                 <div key={field.name}>
-                  <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
                     {field.label}
                   </label>
                   <input
@@ -184,13 +188,13 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder={field.placeholder}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-rose-500/20 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500/60 focus:bg-rose-500/5 transition-all text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-rose-400 focus:bg-white transition-all text-sm"
                   />
                 </div>
               ))}
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">
+                <label className="block text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
                   Message
                 </label>
                 <textarea
@@ -200,7 +204,7 @@ export default function Contact() {
                   placeholder="Tell me about your project or opportunity..."
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-rose-500/20 text-white placeholder-slate-600 focus:outline-none focus:border-rose-500/60 focus:bg-rose-500/5 transition-all text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-rose-400 focus:bg-white transition-all text-sm resize-none"
                 />
               </div>
 

@@ -37,7 +37,7 @@ function ProjectCard({ project, index }) {
       <motion.div animate={{ opacity: hovered ? 0.04 : 0 }} transition={{ duration:0.3 }}
         className="absolute inset-0 pointer-events-none"
         style={{ background:`linear-gradient(135deg,${colors.primary},${colors.secondary})` }} />
-      <div className="p-8">
+      <div className="p-5 sm:p-8">
         <div className="flex items-start justify-between mb-5">
           <div className="flex items-center gap-4">
             <motion.div animate={{ scale: hovered ? 1.15 : 1, rotate: hovered ? 8 : 0 }} transition={{ duration:0.3 }}
@@ -46,8 +46,8 @@ function ProjectCard({ project, index }) {
               <Icon className="w-7 h-7" style={{ color: colors.accent }} aria-hidden="true" />
             </motion.div>
             <div>
-              <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">{project.category}</span>
-              <h3 className="text-2xl font-bold text-white">{project.name}</h3>
+              <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">{project.category}</span>
+              <h3 className="text-2xl font-bold text-gray-900">{project.name}</h3>
               <p className="text-sm font-medium mt-0.5" style={{ color:colors.accent }}>{project.tagline}</p>
             </div>
           </div>
@@ -57,12 +57,12 @@ function ProjectCard({ project, index }) {
             <ArrowUpRight className="w-4 h-4" />
           </motion.div>
         </div>
-        <p className="text-slate-400 text-sm leading-relaxed mb-6">{project.description}</p>
+        <p className="text-gray-500 text-sm leading-relaxed mb-6">{project.description}</p>
         <div className="space-y-2 mb-6">
           {project.highlights.map((h, hi) => (
             <motion.div key={hi} initial={{ opacity:0, x:-15 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ delay:index*0.1+hi*0.06 }} className="flex items-start gap-2">
               <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color:colors.primary }} />
-              <span className="text-slate-300 text-sm">{h}</span>
+              <span className="text-gray-600 text-sm">{h}</span>
             </motion.div>
           ))}
         </div>
@@ -77,24 +77,12 @@ function ProjectCard({ project, index }) {
 function ProjectsBg() {
   return (
     <>
-      <div className="absolute inset-0" style={{ background:'linear-gradient(180deg,#04040a 0%,#0d0603 50%,#04040a 100%)' }} />
-      {/* Orange + fuchsia orbs */}
-      <motion.div animate={{ x:[0,70,0], y:[0,-60,0], scale:[1,1.25,1] }} transition={{ duration:14, repeat:Infinity, ease:'easeInOut' }}
-        className="absolute top-[5%] right-[5%] w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background:'radial-gradient(circle,rgba(249,115,22,0.1) 0%,transparent 70%)', filter:'blur(55px)' }} />
-      <motion.div animate={{ x:[0,-50,0], y:[0,40,0], scale:[1,1.15,1] }} transition={{ duration:18, repeat:Infinity, ease:'easeInOut', delay:2 }}
-        className="absolute bottom-[5%] left-[5%] w-[420px] h-[420px] rounded-full pointer-events-none"
-        style={{ background:'radial-gradient(circle,rgba(236,72,153,0.08) 0%,transparent 70%)', filter:'blur(55px)' }} />
-      {/* Floating window/card shapes */}
-      {[...Array(5)].map((_, i) => (
-        <motion.div key={i}
-          className="absolute pointer-events-none rounded-xl"
-          style={{ width: 80+i*20, height: 60+i*15, left:`${8+i*18}%`, top:`${15+(i%3)*25}%`,
-            border:`1px solid rgba(249,115,22,0.05)`, background:`rgba(249,115,22,0.02)` }}
-          animate={{ y:[0,-(8+i*5),0], rotate:[0, i%2===0?3:-3, 0], opacity:[0.4,0.7,0.4] }}
-          transition={{ duration:7+i*1.5, repeat:Infinity, ease:'easeInOut', delay:i*0.9 }}
-        />
-      ))}
+      <div className="absolute inset-0" style={{ background: '#FFFBF5' }} />
+      {/* Amber SVG blob — bottom-left corner */}
+      <svg className="absolute bottom-0 left-0 w-36 h-36 sm:w-56 sm:h-56 lg:w-96 lg:h-96 pointer-events-none opacity-50" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FDE68A" d="M0,360 L0,0 L118,0 C178,-6,238,28,260,82 C282,136,226,188,258,240 C290,292,358,302,354,350 C350,398,282,366,198,362 C114,360,56,365,0,360 Z"/>
+      </svg>
+      <div className="absolute inset-0 bg-dots-sm opacity-35 pointer-events-none" />
     </>
   )
 }
@@ -105,19 +93,19 @@ export default function Projects() {
       <ProjectsBg />
       <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once:true, margin:'-100px' }} className="max-w-6xl mx-auto relative z-10">
         <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-orange-400 font-mono text-sm uppercase tracking-widest mb-3">04 / Projects</p>
-          <h2 className="section-title text-white mb-4">
+          <p className="font-mono text-sm uppercase tracking-widest mb-3 text-gray-400">04 / Projects</p>
+          <h2 className="section-title mb-4">
             Featured{' '}
             <span style={{ background:'linear-gradient(135deg,#f97316,#ec4899)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Projects</span>
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-fuchsia-500 mx-auto rounded-full" />
-          <p className="text-slate-400 mt-4 max-w-xl mx-auto">Real-world applications built with full-stack technologies, real-time data, and polished UX.</p>
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto">Real-world applications built with full-stack technologies, real-time data, and polished UX.</p>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, i) => <ProjectCard key={project.id} project={project} index={i} />)}
         </div>
         <motion.div variants={itemVariants} className="text-center mt-12">
-          <p className="text-slate-500 text-sm inline-flex items-center gap-1.5">
+          <p className="text-gray-400 text-sm inline-flex items-center gap-1.5">
             <span>More projects available on request. Currently building more exciting things</span>
             <Sparkles className="w-4 h-4 text-orange-300/80" />
           </p>
